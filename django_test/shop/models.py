@@ -11,7 +11,8 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product_name = models.DecimalField(decimal_places=0, max_digits=4)
+    product_name = models.CharField(max_length=255)
+    product_price = models.DecimalField(decimal_places=0, max_digits=4)
     amount = models.IntegerField()
 
     def __str__(self):
