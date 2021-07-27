@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block main_content %}
+    <section>
+            <table class="table table-bordered table-hover table-striped linkedRow" style="margin-top: 30px">
+                <thead>
+                <tr>
+                    <th style="width: 25%">Имя товара</th>
+                    <th style="width: 25%">Количество проданного</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for el in data %}
+                        <tr>
+                            <td>{{ el.product_name }}</td>
+                            <td>{{ el.count }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for data in orders_list %}
+                        <tr>
+                            <td>{{ data }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+{% endblock %}

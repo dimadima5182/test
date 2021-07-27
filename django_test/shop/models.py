@@ -5,9 +5,6 @@ class Order(models.Model):
     number = models.IntegerField()
     created_date = models.DateTimeField()
 
-    def __str__(self):
-        return self.number
-
     def get_total_sum(self):
         order_items = self.order_related.filter(order_id=self.id)
         total_sum = 0
@@ -16,10 +13,11 @@ class Order(models.Model):
         return total_sum
 
     def get_items(self):
-        items_list = []
+        items = ''
         for el in self.order_related.filter(order_id=self.id):
-            items_list.append(f"{el.product_name} x {el.amount}")
-        return items_list
+            items += f"{el.product_name} x {el.amount}.  "
+
+        return items
 
 
 class OrderItem(models.Model):
