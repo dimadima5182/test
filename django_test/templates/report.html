@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block main_content %}
+    <div class="container" style="margin-top: 30px">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-4">
+                <label for="date_from">Дата с</label>
+                <input type="datetime-local" name="date_from" id="date_from" class="form-control datetimeshortcuts" required>
+            </div>
+            <div class="col-4">
+                <label for="date_to">Дата по</label>
+                <input type="datetime-local" name="date_to" id="date_to" class="form-control datetimeshortcuts" required>
+            </div>
+        </div>
+        <input type="submit" style="margin-top: 20px">
+        <section>
+            <table class="table table-bordered table-hover table-striped linkedRow" style="margin-top: 30px">
+                <thead>
+                <tr>
+                    <th style="width: 25%">Дата и время</th>
+                    <th style="width: 25%">Номер заказа</th>
+                    <th style="width: 25%">Сумма заказа</th>
+                    <th style="width: 25%">Товары</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if search_query.count > 0 %}
+                    {% for el in search_query %}
+                        <tr>
+                            <td>{{ el.created_date }}</td>
+                            <td>{{ el.number }}</td>
+                            <td>{{ el.get_total_sum }}</td>
+                            <td>{{ el.get_items }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4"><div class="empty">Ничего не найдено.</div></td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </section>
+    </form>
+    </div>
+{% endblock %}
